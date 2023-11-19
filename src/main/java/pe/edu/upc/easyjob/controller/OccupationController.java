@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @CrossOrigin(origins = {"http://localhost:4200"})
 @RestController
-@RequestMapping("/occupation")
+@RequestMapping("/api")
 public class OccupationController {
 
     @Autowired
@@ -50,7 +50,7 @@ public class OccupationController {
     }
 
     //User story 5 - US05
-    @GetMapping("/all")
+    @GetMapping("/occupation/all")
     ResponseEntity<List<OccupationDTO>> getListOccupations(){
 
         List<Occupation> occupationList;
