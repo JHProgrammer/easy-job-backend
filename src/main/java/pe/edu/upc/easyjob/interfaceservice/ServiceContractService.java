@@ -1,6 +1,7 @@
 package pe.edu.upc.easyjob.interfaceservice;
 
 import pe.edu.upc.easyjob.dto.ServiceContractDTO;
+import pe.edu.upc.easyjob.entity.Employer;
 import pe.edu.upc.easyjob.entity.Service_Contract;
 
 import java.time.LocalDate;
@@ -13,4 +14,6 @@ public interface ServiceContractService {
     public ServiceContractDTO getServiceContractById(Long id) throws Exception;
 
     public List<ServiceContractDTO> getServicesContractByDate(LocalDate dFechaServ) throws Exception;
+
+    public List<ServiceContractDTO> getServiceContractByAll() throws  Exception;
 }

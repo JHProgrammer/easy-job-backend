@@ -118,6 +118,22 @@ public class EmployerController {
         return new ResponseEntity<ServiceContractDTO>(serviceContractDTO,HttpStatus.OK);
     }
 
+    @GetMapping("/getServiceContractAll")
+    ResponseEntity<List<ServiceContractDTO>> getServiceContractAll(){
+
+        //List<Service_Contract> list;
+        List<ServiceContractDTO> listDTO = null;
+
+        try{
+            listDTO = serviceContractService.getServiceContractByAll();
+            //listDTO = convertToListDto(list);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Lista no disponible");
+        }
+
+        return new ResponseEntity<>(listDTO,HttpStatus.OK);
+    }
+
     //User Story 10 - US10
     @GetMapping("/getServiceContractByDate")
     ResponseEntity<List<ServiceContractDTO>> getServiceContractByDate(@RequestParam("dFechaServ") String dFechaServ){
@@ -151,6 +167,15 @@ public class EmployerController {
     //Método para convertir lista de entidad a lista dto
     private List<EmployerDTO> convertToListDto(List<Employer> list){
         return list.stream().map(this::convertToDTO).collect(Collectors.toList());
+    }
+
+    private ServiceContractDTO convertToDTOSC(Service_Contract service_contract){
+        ModelMapper modelMapper = new ModelMapper();
+        ServiceContractDTO serviceContractDTO = modelMapper.map(service_contract,ServiceContractDTO.class);
+        return  serviceContractDTO;
+    }
+    private List<ServiceContractDTO> convertToListDtoSC(List<Service_Contract> list){
+        return list.stream().map(this::convertToDTOSC).collect(Collectors.toList());
     }
 
     //METODOS PARA SERVICE CONTRACT

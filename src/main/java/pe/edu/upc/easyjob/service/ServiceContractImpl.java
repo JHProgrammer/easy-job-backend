@@ -15,6 +15,7 @@ import pe.edu.upc.easyjob.repository.EmployerRepository;
 import pe.edu.upc.easyjob.repository.ServiceContractRepository;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,7 +50,7 @@ public class ServiceContractImpl implements ServiceContractService {
         Service_Contract service_contract;
         ServiceContractDTO serviceContractDTO = new ServiceContractDTO();
         service_contract = serviceContractRepository.findById(id).
-                orElseThrow( ()-> new Exception("no se encontró empleador"));
+                orElseThrow( ()-> new Exception("no se encontró servicio contrato"));
 
         serviceContractDTO.setEmployer_id(service_contract.getEmployer().getId());
         serviceContractDTO.setId(service_contract.getId());
@@ -68,6 +69,25 @@ public class ServiceContractImpl implements ServiceContractService {
         dtos = convertToListDto(serviceContracts);
 
         return dtos;
+    }
+
+    @Override
+    public List<ServiceContractDTO> getServiceContractByAll() throws Exception {
+       // return serviceContractRepository.findAll();
+        List<ServiceContractDTO> contractDTOs = new ArrayList<>();
+        List<Service_Contract> serviceContracts = serviceContractRepository.findAll();
+
+        for (Service_Contract contract : serviceContracts) {
+            ServiceContractDTO dto = new ServiceContractDTO();
+            dto.setId(contract.getId());
+            dto.setEmployer_id(contract.getEmployer().getId());
+            dto.setService_date(contract.getService_date());
+            dto.setDesc_service(contract.getDesc_service());
+
+            contractDTOs.add(dto);
+        }
+
+        return contractDTOs;
     }
 
 
