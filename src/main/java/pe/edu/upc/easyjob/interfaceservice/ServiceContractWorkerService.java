@@ -11,4 +11,6 @@ public interface ServiceContractWorkerService {
     public ServiceContractWorkerDTO register(ServiceContractWorkerDTO serviceContractWorkerDTO) throws Exception;
 
     public List<ServiceContractWorkerDTO> getAllGreaterThanMonto(double monto) throws Exception;
+
+    public List<ServiceContractWorkerDTO> getAllServContractW() throws Exception;
 }

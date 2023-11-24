@@ -78,6 +78,23 @@ public class ServiceContractWorkerServiceImpl implements ServiceContractWorkerSe
         return contractDTOs;
     }
 
+    @Override
+    public List<ServiceContractWorkerDTO> getAllServContractW() throws Exception {
+        List<ServiceContractWorkerDTO> contractDTOs = new ArrayList<>();
+        List<Service_Contract_Worker> service_contract_workers = serviceContractWorkerRepository.findAll();
+
+        for (Service_Contract_Worker contract : service_contract_workers) {
+            ServiceContractWorkerDTO dto = new ServiceContractWorkerDTO();
+            dto.setMonto(contract.getMonto());
+            dto.setWorker_id(contract.getId().getWorker().getId());
+            dto.setService_contract_id(contract.getId().getService_contract().getId());
+
+            contractDTOs.add(dto);
+        }
+
+        return contractDTOs;
+    }
+
     private Service_Contract_Worker convertToEntity(ServiceContractWorkerDTO serviceContractWorkerDTO){
         ModelMapper modelMapper = new ModelMapper();
         Service_Contract_Worker post = modelMapper.map(serviceContractWorkerDTO, Service_Contract_Worker.class);

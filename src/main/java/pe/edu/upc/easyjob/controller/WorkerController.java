@@ -168,6 +168,19 @@ public class WorkerController {
         return new ResponseEntity<>(dtosResponse,HttpStatus.OK);
     }
 
+    @GetMapping("/serviceContractWorker/all")
+    ResponseEntity<List<ServiceContractWorkerDTO>> getAllServContractW(){
+        List<ServiceContractWorkerDTO> dtosResponse;
+        try {
+            dtosResponse = serviceContractWorkerService.getAllServContractW();
+        }catch (Exception e){
+            logger.error(e.toString());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Error al consultar la tabla servicio de contrato");
+        }
+
+        return new ResponseEntity<>(dtosResponse,HttpStatus.OK);
+    }
+
 
     private Worker convertToEntity(WorkerDTO workerDTO){
         ModelMapper modelMapper = new ModelMapper();
